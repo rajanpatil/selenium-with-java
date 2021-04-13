@@ -1,5 +1,6 @@
 package com.selenium;
 
+import java.io.File;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -16,12 +17,12 @@ class GoogleSearchTest {
   @BeforeAll
   static void beforeAll() {
     System.setProperty("webdriver.chrome.driver",
-        getAbsolutePathOfResource("driver/chrome_89/chromedriver"));
+        getChromeDriverAbsolutePath());
     driver = new ChromeDriver();
   }
-  
+
   @AfterAll
-  static void afterAll(){
+  static void afterAll() {
     driver.quit();
   }
 
@@ -36,8 +37,8 @@ class GoogleSearchTest {
     Thread.sleep(5000);  // Let the user actually see something!
   }
 
-  private static String getAbsolutePathOfResource(String resource) {
-    ClassLoader classLoader = GoogleSearchTest.class.getClassLoader();
-    return classLoader.getResource(resource).getPath();
+  private static String getChromeDriverAbsolutePath() {
+    File chromeDriverFile = new File("./driver/chrome_89/chromedriver");
+    return chromeDriverFile.getAbsolutePath();
   }
 }
